@@ -13,9 +13,7 @@ public class WayPoint : MonoBehaviour
         Z = Mathf.RoundToInt(transform.position.z);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    void OnMouseDown() {
+        Debug.Log(transform.name);
     }
 }
