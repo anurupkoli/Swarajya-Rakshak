@@ -16,7 +16,7 @@ public class WayPoint : MonoBehaviour
     public int X;
     public int Z;
 
-    void Start()
+    void OnEnable()
     {
         GetTilePosition();
         ballistas = GameObject.FindWithTag("Ballistas");

@@ -8,7 +8,7 @@ public class EnemyMover : MonoBehaviour
     [SerializeField][Range(0f, 5f)] float speed = 1f;
     List<WayPoint> wayPoints = new List<WayPoint>();
     GameObject pathTiles;
-    private void Start()
+    void OnEnable()
     {
         pathTiles = GameObject.FindGameObjectWithTag("PathTiles");
         FindPaths();
@@ -57,7 +57,7 @@ public class EnemyMover : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             }
         }
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     void HandleEnemyFacing(Vector3 endPosition){
