@@ -10,7 +10,7 @@ public class WayPoint : MonoBehaviour
             return isPlacable;
         }
     }
-    
+
     [SerializeField] GameObject ballistaPrefab;
     GameObject ballistas;
     public int X;
@@ -37,8 +37,8 @@ public class WayPoint : MonoBehaviour
 
     void PlaceBallista()
     {
+        isPlacable = false;
         GameObject ballista = Instantiate(ballistaPrefab, transform.position, Quaternion.identity);
         ballista.transform.parent = ballistas.transform;
-        isPlacable = false;
     }
 }

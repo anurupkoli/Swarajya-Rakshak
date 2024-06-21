@@ -15,10 +15,13 @@ public class Coordinates : MonoBehaviour
     void Awake()
     {
         text = GetComponent<TextMeshPro>();
-        wayPoint = GetComponentInParent<WayPoint>();
         UpdateCoordinates();
+        wayPoint = GetComponentInParent<WayPoint>();
     }
 
+    void Start(){
+        enableText = false;
+    }
     void Update()
     {
         if (!Application.isPlaying)
@@ -27,13 +30,28 @@ public class Coordinates : MonoBehaviour
             UpdateObjectNames();
         }
         ToggleText();
+        ChangeTextColor();
     }
 
-    void ToggleText(){
-        if(Input.GetKeyDown(KeyCode.C)){
+    void ToggleText()
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
             enableText = !enableText;
         }
         text.enabled = enableText;
+    }
+
+    void ChangeTextColor(){
+        
+        if (!wayPoint.IsPlacable)
+        {
+            text.color = changeColor;
+        }
+        else
+        {
+            text.color = defaultColor;
+        }
     }
 
     void UpdateCoordinates()
@@ -42,9 +60,6 @@ public class Coordinates : MonoBehaviour
         coordinates.y = Mathf.RoundToInt(transform.parent.position.z / UnityEditor.EditorSnapSettings.move.y);
 
         text.text = coordinates.x + ", " + coordinates.y;
-        if(!wayPoint.IsPlacable){
-            text.color = changeColor;
-        }
     }
 
     void UpdateObjectNames()
