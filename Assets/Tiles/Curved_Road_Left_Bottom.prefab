@@ -72,6 +72,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Curved_Road_Left_Bottom
       objectReference: {fileID: 0}
+    - target: {fileID: 7733856490057294355, guid: 7c85852fe10e00e4ea96548e0a544671, type: 3}
+      propertyPath: m_TagString
+      value: Path
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
