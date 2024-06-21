@@ -130,16 +130,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b85f3c3508a74f3409ed6c367fcc6af6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wayPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   speed: 1
 --- !u!65 &8567150925479109471
 BoxCollider:
@@ -174,3 +164,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 066c1cebd2b58c04ab00342855293253, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 5

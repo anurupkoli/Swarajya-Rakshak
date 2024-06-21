@@ -12,6 +12,7 @@ public class EnemyMover : MonoBehaviour
     {
         pathTiles = GameObject.FindGameObjectWithTag("PathTiles");
         FindPaths();
+        ReturnToStart();
         StartCoroutine(MoveEnemy());
     }
 
@@ -35,6 +36,10 @@ public class EnemyMover : MonoBehaviour
         path.transform.parent = pathTiles.transform;
     }
 
+    void ReturnToStart(){
+        gameObject.transform.position = wayPoints[0].transform.position;
+    }
+
     IEnumerator MoveEnemy()
     {
         foreach (WayPoint wayPoint in wayPoints)
@@ -43,7 +48,7 @@ public class EnemyMover : MonoBehaviour
             Vector3 endPosition = new Vector3(wayPoint.X, transform.position.y, wayPoint.Z);
 
             HandleEnemyFacing(endPosition);
-            
+
             float distance = 0f;
             while (distance < 1)
             {
@@ -52,6 +57,7 @@ public class EnemyMover : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             }
         }
+        Destroy(gameObject);
     }
 
     void HandleEnemyFacing(Vector3 endPosition){

@@ -9,12 +9,17 @@ public class FindTarget : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enemy = GameObject.FindGameObjectWithTag("Enemy").transform;
+        FindEnemy();
     }
 
     // Update is called once per frame
     void Update()
     {
+        FindEnemy();
         transform.LookAt(enemy);
+    }
+
+    void FindEnemy(){
+        enemy = GameObject.FindGameObjectWithTag("Enemy").transform;
     }
 }
