@@ -314,6 +314,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f6495c1a50a93c4c811281c03df5caa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlacable: 1
+  ballistaPrefab: {fileID: 3219458064393657486, guid: 8a965e088bae16643aab3d07ccfd5e2e, type: 3}
   X: 0
   Z: 0
 --- !u!65 &2516083497301595092
