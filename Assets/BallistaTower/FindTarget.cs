@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class FindTarget : MonoBehaviour
 {
-    [SerializeField] Transform weapon;
     [SerializeField] ParticleSystem boultParticles;
     [SerializeField] float range = 15f;
     Transform target;

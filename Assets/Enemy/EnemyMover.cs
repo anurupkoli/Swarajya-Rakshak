@@ -8,12 +8,17 @@ public class EnemyMover : MonoBehaviour
     [SerializeField][Range(0f, 5f)] float speed = 1f;
     List<WayPoint> wayPoints = new List<WayPoint>();
     GameObject pathTiles;
+    Enemy enemy;
     void OnEnable()
     {
         pathTiles = GameObject.FindGameObjectWithTag("PathTiles");
         FindPaths();
         ReturnToStart();
         StartCoroutine(MoveEnemy());
+    }
+
+    void Start(){
+        enemy = FindAnyObjectByType<Enemy>();
     }
 
     void FindPaths()
@@ -57,6 +62,7 @@ public class EnemyMover : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             }
         }
+        enemy.DeductMoney();
         gameObject.SetActive(false);
     }
 

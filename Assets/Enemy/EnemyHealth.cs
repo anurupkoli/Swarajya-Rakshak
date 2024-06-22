@@ -7,17 +7,23 @@ public class EnemyHealth : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] int health = 5;
     int particleHits = 0;
+    Enemy enemy;
 
+    private void OnParticleCollision(GameObject other) {
+        ProcessHit();
+    }
     void OnEnable(){
         particleHits = 0;
     }
-    private void OnParticleCollision(GameObject other) {
-        ProcessHit();
+
+    void Start(){ 
+        enemy = GetComponent<Enemy>();
     }
 
     void ProcessHit(){
         particleHits++;
         if(particleHits >= health){
+            enemy.RewardMoney();
             gameObject.SetActive(false);
         }
     }
