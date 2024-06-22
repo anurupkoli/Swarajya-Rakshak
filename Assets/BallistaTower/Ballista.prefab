@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boultParticles: {fileID: 3010896162014564642}
-  range: 15
+  range: 20
 --- !u!114 &-7268993814896641474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,6 +61,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a82c70c08a6f1e64486c1011fc90f225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  towerCost: 75
 --- !u!1 &5825014452792322216
 GameObject:
   m_ObjectHideFlags: 0
