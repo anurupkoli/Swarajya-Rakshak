@@ -6,8 +6,8 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     [SerializeField] GameObject prefab;
-    [SerializeField] float timePerSpawn = 1f;
-    [SerializeField] int poolSize = 5;
+    [SerializeField][Range(0.1f, 30f)] float timePerSpawn = 1f;
+    [SerializeField][Range(1, 50)] int poolSize = 5;
     GameObject[] pool;
 
     void Awake()

@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Enemy))]
 public class EnemyHealth : MonoBehaviour
 {
-    // Start is called before the first frame update
     [SerializeField] int health = 5;
+    [SerializeField] int difficultyRamp = 1;
     int particleHits = 0;
     Enemy enemy;
 
@@ -29,6 +30,7 @@ public class EnemyHealth : MonoBehaviour
         if (particleHits >= health)
         {
             enemy.RewardMoney();
+            health += difficultyRamp;
             gameObject.SetActive(false);
         }
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[RequireComponent(typeof(Enemy))]
 public class EnemyMover : MonoBehaviour
 {
     [SerializeField][Range(0f, 5f)] float speed = 1f;
@@ -66,12 +67,16 @@ public class EnemyMover : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             }
         }
-        enemy.DeductMoney();
-        gameObject.SetActive(false);
+        FinishMoving();
     }
 
     void HandleEnemyFacing(Vector3 endPosition)
     {
         transform.LookAt(endPosition);
+    }
+
+    void FinishMoving(){
+        enemy.DeductMoney();
+        gameObject.SetActive(false);
     }
 }
