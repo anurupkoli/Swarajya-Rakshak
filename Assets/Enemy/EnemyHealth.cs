@@ -9,20 +9,25 @@ public class EnemyHealth : MonoBehaviour
     int particleHits = 0;
     Enemy enemy;
 
-    private void OnParticleCollision(GameObject other) {
+    private void OnParticleCollision(GameObject other)
+    {
         ProcessHit();
     }
-    void OnEnable(){
+    void OnEnable()
+    {
         particleHits = 0;
     }
 
-    void Start(){ 
+    void Start()
+    {
         enemy = GetComponent<Enemy>();
     }
 
-    void ProcessHit(){
+    void ProcessHit()
+    {
         particleHits++;
-        if(particleHits >= health){
+        if (particleHits >= health)
+        {
             enemy.RewardMoney();
             gameObject.SetActive(false);
         }

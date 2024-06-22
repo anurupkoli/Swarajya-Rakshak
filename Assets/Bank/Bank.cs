@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Bank : MonoBehaviour
 {
@@ -19,11 +20,22 @@ public class Bank : MonoBehaviour
         currentMoney = startingMoney;
     }
 
-    public void Deposit(int amount){
+    public void Deposit(int amount)
+    {
         currentMoney += Mathf.Abs(amount);
     }
 
-    public void Retrive(int amount){
+    public void Retrive(int amount)
+    {
         currentMoney -= Mathf.Abs(amount);
+        if (currentMoney < 0)
+        {
+            ReloadScene();
+        }
+    }
+
+    void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

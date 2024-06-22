@@ -16,13 +16,13 @@ public class Enemy : MonoBehaviour
 
     public void RewardMoney()
     {
-        if(bank == null){return;}
+        if (bank == null) { return; }
         bank.Deposit(rewardMoney);
     }
 
     public void DeductMoney()
     {
-        if(bank == null){return;}
+        if (bank == null) { return; }
         bank.Retrive(deductMoney);
     }
 }

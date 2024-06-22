@@ -8,7 +8,7 @@ public class FindTarget : MonoBehaviour
     [SerializeField] ParticleSystem boultParticles;
     [SerializeField] float range = 15f;
     Transform target;
-    
+
     void Update()
     {
         FindClosestTarget();
@@ -40,12 +40,14 @@ public class FindTarget : MonoBehaviour
         {
             Attack(true);
         }
-        else{
+        else
+        {
             Attack(false);
         }
     }
 
-    void Attack(bool isAttacking){
+    void Attack(bool isAttacking)
+    {
         var emissionModule = boultParticles.emission;
         emissionModule.enabled = isAttacking;
     }

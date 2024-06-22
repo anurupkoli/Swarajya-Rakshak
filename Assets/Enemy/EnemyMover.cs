@@ -17,7 +17,8 @@ public class EnemyMover : MonoBehaviour
         StartCoroutine(MoveEnemy());
     }
 
-    void Start(){
+    void Start()
+    {
         enemy = FindAnyObjectByType<Enemy>();
     }
 
@@ -28,7 +29,8 @@ public class EnemyMover : MonoBehaviour
         AddToWayPoints(paths);
     }
 
-    void AddToWayPoints(List<GameObject> paths){
+    void AddToWayPoints(List<GameObject> paths)
+    {
         wayPoints.Clear();
         foreach (GameObject path in paths)
         {
@@ -37,11 +39,13 @@ public class EnemyMover : MonoBehaviour
         }
     }
 
-    void AddToPathTiles(GameObject path){
+    void AddToPathTiles(GameObject path)
+    {
         path.transform.parent = pathTiles.transform;
     }
 
-    void ReturnToStart(){
+    void ReturnToStart()
+    {
         gameObject.transform.position = wayPoints[0].transform.position;
     }
 
@@ -66,7 +70,8 @@ public class EnemyMover : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    void HandleEnemyFacing(Vector3 endPosition){
-         transform.LookAt(endPosition);
+    void HandleEnemyFacing(Vector3 endPosition)
+    {
+        transform.LookAt(endPosition);
     }
 }

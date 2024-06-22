@@ -19,7 +19,8 @@ public class Coordinates : MonoBehaviour
         wayPoint = GetComponentInParent<WayPoint>();
     }
 
-    void Start(){
+    void Start()
+    {
         enableText = false;
     }
     void Update()
@@ -42,8 +43,9 @@ public class Coordinates : MonoBehaviour
         text.enabled = enableText;
     }
 
-    void ChangeTextColor(){
-        
+    void ChangeTextColor()
+    {
+
         if (!wayPoint.IsPlacable)
         {
             text.color = changeColor;

@@ -2200,8 +2200,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1970669397}
   m_Layer: 0
-  m_Name: Ballistas
-  m_TagString: Ballistas
+  m_Name: Towers
+  m_TagString: Towers
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

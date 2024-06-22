@@ -5,24 +5,28 @@ using UnityEngine;
 public class WayPoint : MonoBehaviour
 {
     [SerializeField] bool isPlacable = false;
-    public bool IsPlacable{
-        get{
+    [SerializeField] Tower towerPrefab;
+    public bool IsPlacable
+    {
+        get
+        {
             return isPlacable;
         }
     }
 
     [SerializeField] GameObject ballistaPrefab;
-    GameObject ballistas;
+    TowerSpawner towerSpawner;
     public int X;
     public int Z;
 
     void OnEnable()
     {
+        towerSpawner = FindAnyObjectByType<TowerSpawner>();
         GetTilePosition();
-        ballistas = GameObject.FindWithTag("Ballistas");
     }
 
-    void GetTilePosition(){
+    void GetTilePosition()
+    {
         X = Mathf.RoundToInt(transform.position.x);
         Z = Mathf.RoundToInt(transform.position.z);
     }
@@ -37,8 +41,7 @@ public class WayPoint : MonoBehaviour
 
     void PlaceBallista()
     {
-        isPlacable = false;
-        GameObject ballista = Instantiate(ballistaPrefab, transform.position, Quaternion.identity);
-        ballista.transform.parent = ballistas.transform;
+        bool isPlaced = towerPrefab.InstantiateTower(towerPrefab, transform.position, towerSpawner);
+        isPlacable = !isPlaced;
     }
 }
