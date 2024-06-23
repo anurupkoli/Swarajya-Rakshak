@@ -8,6 +8,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 489302774872641860, guid: d19f4195262ca7042b06c82713285db0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 489302774872641860, guid: d19f4195262ca7042b06c82713285db0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 489302774872641860, guid: d19f4195262ca7042b06c82713285db0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3756781578181977811, guid: d19f4195262ca7042b06c82713285db0, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3756781578181977811, guid: d19f4195262ca7042b06c82713285db0, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3756781578181977811, guid: d19f4195262ca7042b06c82713285db0, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3756781578181977811, guid: d19f4195262ca7042b06c82713285db0, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4286611584
+      objectReference: {fileID: 0}
     - target: {fileID: 6801495216190155019, guid: d19f4195262ca7042b06c82713285db0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

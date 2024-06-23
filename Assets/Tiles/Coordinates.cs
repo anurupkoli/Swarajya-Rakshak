@@ -29,6 +29,7 @@ public class Coordinates : MonoBehaviour
         {
             UpdateCoordinates();
             UpdateObjectNames();
+            enableText = true;
         }
         ToggleText();
         ChangeTextColor();
@@ -61,7 +62,7 @@ public class Coordinates : MonoBehaviour
         coordinates.x = Mathf.RoundToInt(transform.parent.position.x / UnityEditor.EditorSnapSettings.move.x);
         coordinates.y = Mathf.RoundToInt(transform.parent.position.z / UnityEditor.EditorSnapSettings.move.y);
 
-        text.text = coordinates.x + ", " + coordinates.y;
+        text.text = coordinates.x + "," + coordinates.y;
     }
 
     void UpdateObjectNames()

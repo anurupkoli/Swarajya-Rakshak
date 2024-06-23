@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,24 +26,10 @@ public class EnemyMover : MonoBehaviour
 
     void FindPaths()
     {
-        List<GameObject> paths = GameObject.FindGameObjectsWithTag("Path").ToList();
-        paths = paths.OrderBy(path => path.name).ToList();
-        AddToWayPoints(paths);
-    }
-
-    void AddToWayPoints(List<GameObject> paths)
-    {
         wayPoints.Clear();
-        foreach (GameObject path in paths)
-        {
-            wayPoints.Add(path.GetComponent<WayPoint>());
-            AddToPathTiles(path);
+        foreach(Transform child in pathTiles.transform){
+            wayPoints.Add(child.GetComponent<WayPoint>());
         }
-    }
-
-    void AddToPathTiles(GameObject path)
-    {
-        path.transform.parent = pathTiles.transform;
     }
 
     void ReturnToStart()
@@ -76,7 +63,7 @@ public class EnemyMover : MonoBehaviour
     }
 
     void FinishMoving(){
-        enemy.DeductMoney();
         gameObject.SetActive(false);
+        enemy.DeductMoney();
     }
 }
