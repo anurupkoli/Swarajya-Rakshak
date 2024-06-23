@@ -8,15 +8,17 @@ public class Coordinates : MonoBehaviour
 {
     [SerializeField] Color defaultColor = Color.white;
     [SerializeField] Color changeColor = Color.gray;
+    [SerializeField] Color pathColor = Color.red;
+    [SerializeField] Color exploredColor = Color.yellow;
     TextMeshPro text;
+    GridManager gridManager;
     Vector2Int coordinates = new Vector2Int();
-    WayPoint wayPoint;
     bool enableText = true;
     void Awake()
     {
         text = GetComponent<TextMeshPro>();
+        gridManager = FindObjectOfType<GridManager>();
         UpdateCoordinates();
-        wayPoint = GetComponentInParent<WayPoint>();
     }
 
     void Start()
@@ -46,13 +48,21 @@ public class Coordinates : MonoBehaviour
 
     void ChangeTextColor()
     {
+        if(gridManager == null){return;}
 
-        if (!wayPoint.IsPlacable)
-        {
+        Node node = gridManager.GetNode(coordinates);
+        if(node == null){return;}
+
+        if(!node.isWalkable){
             text.color = changeColor;
         }
-        else
-        {
+        else if(node.isPath){
+            text.color = pathColor;
+        }
+        else if(node.isExplored){
+            text.color = exploredColor;
+        }
+        else{
             text.color = defaultColor;
         }
     }

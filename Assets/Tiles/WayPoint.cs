@@ -4,17 +4,12 @@ using UnityEngine;
 
 public class WayPoint : MonoBehaviour
 {
-    [SerializeField] bool isPlacable = false;
-    [SerializeField] Tower towerPrefab;
-    public bool IsPlacable
-    {
-        get
-        {
-            return isPlacable;
-        }
-    }
-
     [SerializeField] GameObject ballistaPrefab;
+    [SerializeField] Tower towerPrefab;
+    [SerializeField] bool isPlacable = false;
+    public bool IsPlacable{get{return isPlacable;}}
+    GridManager gridManager;
+
     TowerSpawner towerSpawner;
     public int X;
     public int Z;
@@ -23,6 +18,11 @@ public class WayPoint : MonoBehaviour
     {
         towerSpawner = FindAnyObjectByType<TowerSpawner>();
         GetTilePosition();
+    }
+
+    void Start(){
+        gridManager = FindObjectOfType<GridManager>();
+        SetIsWalkable();
     }
 
     void GetTilePosition()
@@ -43,5 +43,16 @@ public class WayPoint : MonoBehaviour
     {
         bool isPlaced = towerPrefab.InstantiateTower(towerPrefab, transform.position, towerSpawner);
         isPlacable = !isPlaced;
+    }
+
+    void SetIsWalkable(){
+        if(gridManager == null){return;}
+
+        Vector2Int tileCoordinates = gridManager.GetCoordinates(transform.position);
+        Node currTile = gridManager.GetNode(tileCoordinates);
+        
+        if(currTile == null){return;}
+
+        currTile.isWalkable = isPlacable;
     }
 }
