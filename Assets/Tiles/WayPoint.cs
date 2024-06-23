@@ -9,11 +9,16 @@ public class WayPoint : MonoBehaviour
     [SerializeField] bool isPlacable = false;
     public bool IsPlacable{get{return isPlacable;}}
     GridManager gridManager;
+    PathFinder pathFinder;
 
     TowerSpawner towerSpawner;
     public int X;
     public int Z;
 
+    void Awake(){
+        gridManager = FindObjectOfType<GridManager>();
+        pathFinder = FindAnyObjectByType<PathFinder>();
+    }
     void OnEnable()
     {
         towerSpawner = FindAnyObjectByType<TowerSpawner>();
@@ -21,7 +26,6 @@ public class WayPoint : MonoBehaviour
     }
 
     void Start(){
-        gridManager = FindObjectOfType<GridManager>();
         SetIsWalkable();
     }
 
@@ -33,8 +37,13 @@ public class WayPoint : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (isPlacable)
-        {
+        if(gridManager == null){ return; }
+
+        Vector2Int coordinates = gridManager.GetCoordinates(transform.position);
+        if(coordinates == null){return;}
+
+        Node currNode = gridManager.GetNode(coordinates);
+        if( currNode.isWalkable && !pathFinder.WillBlockPath(coordinates)){
             PlaceBallista();
         }
     }
@@ -43,16 +52,18 @@ public class WayPoint : MonoBehaviour
     {
         bool isPlaced = towerPrefab.InstantiateTower(towerPrefab, transform.position, towerSpawner);
         isPlacable = !isPlaced;
+        if(isPlaced){
+            gridManager.BlockNode(gridManager.GetCoordinates(transform.position));
+        }
     }
 
     void SetIsWalkable(){
         if(gridManager == null){return;}
 
         Vector2Int tileCoordinates = gridManager.GetCoordinates(transform.position);
-        Node currTile = gridManager.GetNode(tileCoordinates);
-        
-        if(currTile == null){return;}
 
-        currTile.isWalkable = isPlacable;
+        if(isPlacable == false){
+            gridManager.BlockNode(tileCoordinates);
+        }
     }
 }

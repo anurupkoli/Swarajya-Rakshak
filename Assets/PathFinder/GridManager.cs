@@ -32,6 +32,20 @@ public class GridManager : MonoBehaviour
         if(!grid.ContainsKey(coordinates)){return null;}
         return grid[coordinates];
     }
+
+    public void BlockNode(Vector2Int coordinates){
+        if(!grid.ContainsKey(coordinates)){return;}
+        grid[coordinates].isWalkable = false;
+    }
+
+    public void RefreshNodes(){
+        foreach(KeyValuePair<Vector2Int, Node> node in grid){
+            node.Value.isExplored = false;
+            node.Value.isPath = false;
+            node.Value.prev = null;
+        }
+    }
+
     void CreateGrid(){
         for(int x=0; x<gridSize.x; x++){
             for(int y=0; y<gridSize.y; y++){

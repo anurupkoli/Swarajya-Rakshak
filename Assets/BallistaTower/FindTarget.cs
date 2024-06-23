@@ -18,6 +18,8 @@ public class FindTarget : MonoBehaviour
     void FindClosestTarget()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        if(enemies == null){return;}
+
         GameObject closestTarget = null;
         float maxDistance = Mathf.Infinity;
         foreach (GameObject enemy in enemies)
@@ -29,11 +31,14 @@ public class FindTarget : MonoBehaviour
                 maxDistance = targetDistance;
             }
         }
+
+        if(closestTarget == null){return;}
         target = closestTarget.transform;
     }
 
     void LookAtTarget()
     {
+        if(target == null){return;}
         float distance = Vector3.Distance(transform.position, target.transform.position);
         transform.GetChild(1).LookAt(target);
         if (distance <= range)
