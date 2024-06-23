@@ -19,4 +19,6 @@ public class UpdateGold : MonoBehaviour
     void UpdateText(){
         textMeshPro.text = "Gold : " +  bank.CurrentMoney.ToString();
     }
+
+    
 }

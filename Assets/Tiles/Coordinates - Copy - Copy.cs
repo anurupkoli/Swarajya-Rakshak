@@ -27,9 +27,9 @@ public class Coordinates : MonoBehaviour
     {
         if (!Application.isPlaying)
         {
+            text.enabled = true;
             UpdateCoordinates();
             UpdateObjectNames();
-            enableText = true;
         }
         ToggleText();
         ChangeTextColor();
