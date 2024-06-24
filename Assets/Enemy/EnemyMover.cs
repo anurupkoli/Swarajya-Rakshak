@@ -15,11 +15,9 @@ public class EnemyMover : MonoBehaviour
 
     void OnEnable()
     {
-        
         FindObjectOfType<PathFinder>().RecalculatePathRequested += RecalculatePath;
-        RecalculatePath();
         ReturnToStart();
-        StartCoroutine(MoveEnemy());
+        RecalculatePath(true);
     }
 
     void OnDisable()
@@ -34,10 +32,24 @@ public class EnemyMover : MonoBehaviour
         gridManager = FindAnyObjectByType<GridManager>();
     }
 
-    public void RecalculatePath()
+    public void RecalculatePath(){
+        RecalculatePath(false);
+    }
+
+    public void RecalculatePath(bool hasReset)
     {
         path.Clear();
-        path = pathFinder.GetNewPath();
+        StopAllCoroutines();
+        if (hasReset)
+        {
+            path = pathFinder.GetNewPath(pathFinder.StartCoords);
+        }
+        else
+        {
+            path = pathFinder.GetNewPath(gridManager.GetCoordinates(transform.position));
+        }
+
+        StartCoroutine(MoveEnemy());
     }
 
     void ReturnToStart()

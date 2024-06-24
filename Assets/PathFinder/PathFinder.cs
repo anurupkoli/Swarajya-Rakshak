@@ -37,19 +37,25 @@ public class PathFinder : MonoBehaviour
     public List<Node> GetNewPath()
     {
         gridManager.RefreshNodes();
-        BFS();
+        BFS(startCoords);
+        return FindPath();
+    }
+    public List<Node> GetNewPath(Vector2Int coordinates)
+    {
+        gridManager.RefreshNodes();
+        BFS(coordinates);
         return FindPath();
     }
 
-    void BFS()
+    void BFS(Vector2Int coordinates)
     {
         frontier.Clear();
         reached.Clear();
 
         bool isRunning = true;
 
-        frontier.Enqueue(startNode);
-        reached.Add(startNode.coordinates, startNode);
+        frontier.Enqueue(grid[coordinates]);
+        reached.Add(coordinates, grid[coordinates]);
 
         while (frontier.Count > 0 && isRunning)
         {
