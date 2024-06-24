@@ -15,9 +15,16 @@ public class EnemyMover : MonoBehaviour
 
     void OnEnable()
     {
+        
+        FindObjectOfType<PathFinder>().RecalculatePathRequested += RecalculatePath;
         RecalculatePath();
         ReturnToStart();
         StartCoroutine(MoveEnemy());
+    }
+
+    void OnDisable()
+    {
+        FindObjectOfType<PathFinder>().RecalculatePathRequested -= RecalculatePath;
     }
 
     void Awake()

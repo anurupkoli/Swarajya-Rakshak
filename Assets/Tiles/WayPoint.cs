@@ -59,7 +59,7 @@ public class WayPoint : MonoBehaviour
         if (isPlaced)
         {
             gridManager.BlockNode(gridManager.GetCoordinates(transform.position));
-            pathFinder.NotifyReceivers();
+            pathFinder.RequestRecalculatePath();
 
         }
     }

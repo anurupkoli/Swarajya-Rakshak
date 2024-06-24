@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PathFinder : MonoBehaviour
 {
@@ -121,8 +122,9 @@ public class PathFinder : MonoBehaviour
         return false;
     }
 
-    public void NotifyReceivers()
+    public event Action RecalculatePathRequested;
+    public void RequestRecalculatePath()
     {
-        BroadcastMessage("RecalculatePath", SendMessageOptions.DontRequireReceiver);
+        RecalculatePathRequested?.Invoke();
     }
 }
