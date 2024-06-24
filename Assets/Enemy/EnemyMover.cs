@@ -32,7 +32,8 @@ public class EnemyMover : MonoBehaviour
         gridManager = FindAnyObjectByType<GridManager>();
     }
 
-    public void RecalculatePath(){
+    public void RecalculatePath()
+    {
         RecalculatePath(false);
     }
 
