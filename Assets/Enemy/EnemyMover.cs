@@ -8,41 +8,42 @@ using UnityEngine;
 public class EnemyMover : MonoBehaviour
 {
     [SerializeField][Range(0f, 5f)] float speed = 1f;
-    List<WayPoint> wayPoints = new List<WayPoint>();
-    GameObject pathTiles;
+    List<Node> path = new List<Node>();
+    PathFinder pathFinder;
+    GridManager gridManager;
     Enemy enemy;
+
     void OnEnable()
     {
-        pathTiles = GameObject.FindGameObjectWithTag("PathTiles");
-        FindPaths();
+        RecalculatePath();
         ReturnToStart();
         StartCoroutine(MoveEnemy());
     }
 
-    void Start()
+    void Awake()
     {
         enemy = FindAnyObjectByType<Enemy>();
+        pathFinder = FindAnyObjectByType<PathFinder>();
+        gridManager = FindAnyObjectByType<GridManager>();
     }
 
-    void FindPaths()
+    public void RecalculatePath()
     {
-        wayPoints.Clear();
-        foreach(Transform child in pathTiles.transform){
-            wayPoints.Add(child.GetComponent<WayPoint>());
-        }
+        path.Clear();
+        path = pathFinder.GetNewPath();
     }
 
     void ReturnToStart()
     {
-        gameObject.transform.position = wayPoints[0].transform.position;
+        gameObject.transform.position = gridManager.GetPosition(pathFinder.StartCoords);
     }
 
     IEnumerator MoveEnemy()
     {
-        foreach (WayPoint wayPoint in wayPoints)
+        for (int i = 0; i < path.Count; i++)
         {
             Vector3 startPosition = transform.position;
-            Vector3 endPosition = new Vector3(wayPoint.X, transform.position.y, wayPoint.Z);
+            Vector3 endPosition = gridManager.GetPosition(path[i].coordinates);
 
             HandleEnemyFacing(endPosition);
 
@@ -62,7 +63,8 @@ public class EnemyMover : MonoBehaviour
         transform.LookAt(endPosition);
     }
 
-    void FinishMoving(){
+    void FinishMoving()
+    {
         gameObject.SetActive(false);
         enemy.DeductMoney();
     }

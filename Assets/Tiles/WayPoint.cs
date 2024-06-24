@@ -7,7 +7,7 @@ public class WayPoint : MonoBehaviour
     [SerializeField] GameObject ballistaPrefab;
     [SerializeField] Tower towerPrefab;
     [SerializeField] bool isPlacable = false;
-    public bool IsPlacable{get{return isPlacable;}}
+    public bool IsPlacable { get { return isPlacable; } }
     GridManager gridManager;
     PathFinder pathFinder;
 
@@ -15,17 +15,20 @@ public class WayPoint : MonoBehaviour
     public int X;
     public int Z;
 
-    void Awake(){
+    void Awake()
+    {
         gridManager = FindObjectOfType<GridManager>();
         pathFinder = FindAnyObjectByType<PathFinder>();
     }
+
     void OnEnable()
     {
         towerSpawner = FindAnyObjectByType<TowerSpawner>();
         GetTilePosition();
     }
 
-    void Start(){
+    void Start()
+    {
         SetIsWalkable();
     }
 
@@ -37,13 +40,14 @@ public class WayPoint : MonoBehaviour
 
     void OnMouseDown()
     {
-        if(gridManager == null){ return; }
+        if (gridManager == null) { return; }
 
         Vector2Int coordinates = gridManager.GetCoordinates(transform.position);
-        if(coordinates == null){return;}
+        if (coordinates == null) { return; }
 
         Node currNode = gridManager.GetNode(coordinates);
-        if( currNode.isWalkable && !pathFinder.WillBlockPath(coordinates)){
+        if (currNode.isWalkable && !pathFinder.WillBlockPath(coordinates))
+        {
             PlaceBallista();
         }
     }
@@ -52,17 +56,22 @@ public class WayPoint : MonoBehaviour
     {
         bool isPlaced = towerPrefab.InstantiateTower(towerPrefab, transform.position, towerSpawner);
         isPlacable = !isPlaced;
-        if(isPlaced){
+        if (isPlaced)
+        {
             gridManager.BlockNode(gridManager.GetCoordinates(transform.position));
+            pathFinder.NotifyReceivers();
+
         }
     }
 
-    void SetIsWalkable(){
-        if(gridManager == null){return;}
+    void SetIsWalkable()
+    {
+        if (gridManager == null) { return; }
 
         Vector2Int tileCoordinates = gridManager.GetCoordinates(transform.position);
 
-        if(isPlacable == false){
+        if (isPlacable == false)
+        {
             gridManager.BlockNode(tileCoordinates);
         }
     }

@@ -5,7 +5,9 @@ using UnityEngine;
 public class PathFinder : MonoBehaviour
 {
     [SerializeField] Vector2Int startCoords;
+    public Vector2Int StartCoords { get { return startCoords; } }
     [SerializeField] Vector2Int endCoords;
+    public Vector2Int EndCoords { get { return endCoords; } }
     Node currNode;
     Node startNode;
     Node endNode;
@@ -13,24 +15,25 @@ public class PathFinder : MonoBehaviour
     GridManager gridManager;
     Dictionary<Vector2Int, Node> grid = new Dictionary<Vector2Int, Node>();
     Dictionary<Vector2Int, Node> reached = new Dictionary<Vector2Int, Node>();
-    Queue<Node> forntier = new Queue<Node>();
+    Queue<Node> frontier = new Queue<Node>();
+
     void Awake()
     {
         gridManager = FindObjectOfType<GridManager>();
         if (gridManager != null)
         {
             grid = gridManager.Grid;
+            startNode = grid[startCoords];
+            endNode = grid[endCoords];
         }
     }
 
     void Start()
     {
-        startNode = grid[startCoords];
-        endNode = grid[endCoords];
         GetNewPath();
     }
 
-    List<Node> GetNewPath()
+    public List<Node> GetNewPath()
     {
         gridManager.RefreshNodes();
         BFS();
@@ -39,17 +42,17 @@ public class PathFinder : MonoBehaviour
 
     void BFS()
     {
-        forntier.Clear();
+        frontier.Clear();
         reached.Clear();
 
         bool isRunning = true;
 
-        forntier.Enqueue(startNode);
+        frontier.Enqueue(startNode);
         reached.Add(startNode.coordinates, startNode);
 
-        while (forntier.Count > 0 && isRunning)
+        while (frontier.Count > 0 && isRunning)
         {
-            currNode = forntier.Dequeue();
+            currNode = frontier.Dequeue();
             currNode.isExplored = true;
             ExploreNeighbors();
             if (currNode.coordinates == endNode.coordinates)
@@ -77,7 +80,7 @@ public class PathFinder : MonoBehaviour
             {
                 neighbor.prev = currNode;
                 reached.Add(neighbor.coordinates, neighbor);
-                forntier.Enqueue(neighbor);
+                frontier.Enqueue(neighbor);
             }
         }
     }
@@ -85,7 +88,8 @@ public class PathFinder : MonoBehaviour
     List<Node> FindPath()
     {
         List<Node> path = new List<Node>();
-        if(currNode.coordinates != endNode.coordinates){
+        if (currNode.coordinates != endNode.coordinates)
+        {
             return null;
         }
         while (currNode.prev != null)
@@ -100,18 +104,25 @@ public class PathFinder : MonoBehaviour
 
     public bool WillBlockPath(Vector2Int coordinates)
     {
-        if(grid.ContainsKey(coordinates)){
+        if (grid.ContainsKey(coordinates))
+        {
             bool prevState = grid[coordinates].isWalkable;
             grid[coordinates].isWalkable = false;
             List<Node> newPath = GetNewPath();
             grid[coordinates].isWalkable = prevState;
 
-            if(newPath == null){
+            if (newPath == null)
+            {
                 GetNewPath();
-                return true;;
+                return true;
             }
         }
 
         return false;
+    }
+
+    public void NotifyReceivers()
+    {
+        BroadcastMessage("RecalculatePath", SendMessageOptions.DontRequireReceiver);
     }
 }

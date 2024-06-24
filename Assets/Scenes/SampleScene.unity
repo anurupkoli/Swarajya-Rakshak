@@ -41945,7 +41945,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 908714472238900740, guid: 5b44a306a9a984f439a892a78db1e005, type: 3}
       propertyPath: startingMoney
-      value: 3000
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 3198297240093228457, guid: 5b44a306a9a984f439a892a78db1e005, type: 3}
       propertyPath: m_Name
@@ -41970,7 +41970,7 @@ PrefabInstance:
       objectReference: {fileID: 5040643765344069697, guid: b940df629b09f434dbb9fd487257db6c, type: 3}
     - target: {fileID: 2972542526228101030, guid: cf314b3b4eed97643985d9d0ced17d22, type: 3}
       propertyPath: poolSize
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6765922294451084949, guid: cf314b3b4eed97643985d9d0ced17d22, type: 3}
       propertyPath: m_Name
