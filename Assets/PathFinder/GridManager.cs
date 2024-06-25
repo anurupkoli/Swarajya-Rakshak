@@ -7,6 +7,7 @@ public class GridManager : MonoBehaviour
 {
     [SerializeField] Vector2Int gridSize;
     [SerializeField] int unityGridSize = 10;
+    public int UnityGridSize{get{return unityGridSize;}}
     Dictionary<Vector2Int, Node> grid = new Dictionary<Vector2Int, Node>();
     public Dictionary<Vector2Int, Node> Grid { get { return grid; } }
 
